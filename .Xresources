@@ -1,0 +1,66 @@
+Xft.dpi: 144
+Xft.autohint: 0
+Xft.rgba: rgb
+Xft.antialias: true
+Xft.hinting: 1
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+
+URxvt.scrollBar: false
+URxvt.depth: 32
+URxvt.font: xft:Fira Mono:style=Medium:size=16
+!URxvt.font: xft:Fira Mono for Powerline:style=Medium:size=16
+URxvt*buffered: true
+URxvt*underlineColor: yellow
+URxvt*borderless: true
+URxvt*loginShell: true
+URxvt*saveLines: 20000
+URxvt*termName: rxvt-unicode
+URxvt.perl-ext-common: default,matcher,resize-font,selection-to-clipboard
+
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*scrollTtyKeypress:    true
+
+!todo: fix open links in browser
+URxvt.urlLauncher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+
+URxvt.keysym.C--: resize-font:smaller
+URxvt.keysym.C-equal: resize-font:bigger
+URxvt.keysym.C-0: resize-font:reset
+
+URxvt*foreground: #b3c9d7
+URxvt*background: #191919
+!black
+URxvt*color0: #191919
+URxvt*color8: #191919
+!red
+URxvt*color1: #ff355b
+URxvt*color9: #ff355b
+!green
+URxvt*color2: #b7e876
+URxvt*color10: #b7e876
+!yellow
+URxvt*color3: #ffc251
+URxvt*color11: #ffc251
+!blue
+URxvt*color4: #76d4ff
+URxvt*color12: #76d4ff
+!magenta
+URxvt*color5: #ba76e7
+URxvt*color13: #ba76e7
+!cyan
+URxvt*color6: #6cbfb5
+URxvt*color14: #6cbfb5
+!white
+URxvt*color7: #c2c8d7
+URxvt*color15: #c2c8d7
+Urxvt*colorBD: #9fb3c1
+
+URxvt.keysym.Mod4-V: eval:paste_clipboard
+
+URxvt.keysym.Control-Up:     \033[1;5A
+URxvt.keysym.Control-Down:   \033[1;5B
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5C

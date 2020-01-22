@@ -1,0 +1,5 @@
+[user]
+	email = al3xander.koval@gmail.com
+	name = k0va1
+[core]
+	excludesfile = /home/koval/.gitignore

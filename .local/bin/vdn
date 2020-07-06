@@ -1,0 +1,7 @@
+#! /bin/sh
+
+name=${1:-k0va1}
+
+nmcli con down $name >/dev/null 2>&1
+
+notify-send "🖧  disconnected from Saray VPN"

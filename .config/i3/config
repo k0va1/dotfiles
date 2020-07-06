@@ -1,23 +1,6 @@
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. Ho wever, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+font pango:JetBrainsMono Nerd Font Mono 8
 
 # screens config
 # set $monleft DP1
@@ -26,18 +9,14 @@ font pango:monospace 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec urxvt 
+# bindsym $mod+Return exec urxvt -cd "`xcwd`"
+bindsym $mod+Return exec alacritty --working-directory "`xcwd`"
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -52,10 +31,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+- split horizontal
+bindsym $mod+b split horizontal
 
 # split in vertical orientation
-bindsym $mod+_ split vertical
+bindsym $mod+v split vertical
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -73,9 +52,6 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -133,18 +109,13 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+bindsym $mod+r mode "resize"
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
+        bindsym j resize grow width 10 px or 10 ppt
+        bindsym i resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -153,38 +124,38 @@ mode "resize" {
 }
 
 # lock the screen
-bindsym --release $mod+Shift+L exec physlock -p "$(cat ~/banner.txt)"
- 
-bindsym $mod+r mode "resize"
+bindsym --release $mod+Shift+L exec slock
+
+# ranger
+bindsym --release $mod+Shift+Return exec alacritty -e ranger
 
 # take a screenshot
 bindsym --release Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mv $f ~/screenshots'
-bindsym --release $mod+F11 exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/screenshots && mv $f ~/screenshots && xclip -selection clipboard -t image/png -i ~/screenshots/`ls -1 -t ~/screenshots | head -1`' # Area selection
+bindsym --release $mod+grave exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/screenshots && mv $f ~/screenshots && xclip -selection clipboard -t image/png -i ~/screenshots/`ls -1 -t ~/screenshots | head -1`' # Area selection
 
 # disable borders
 for_window [class="^.*"] border pixel 0
 
 # asigning applications for specific workspaces
-assign [class="^URxvt$" title="^ranger$"] 5
+assign [class="Steam"] 8
+for_window [class="Spotify"] move to workspace 6
 assign [class="TelegramDesktop"] 4
 assign [class="Slack"] 4
-assign [class="URxvt"] 3
-assign [class="Emacs"] 2
+assign [class="zoom"] 4
 assign [class="chromium"] 1
 
-
-exec_always --no-startup-id /home/k0va1/.scripts/desktop.sh
+#exec_always --no-startup-id /home/k0va1/.scripts/desktop.sh
+exec picom -CGb
+#exec --no-startup-id hsetroot -solid "#000000"
 exec_always --no-startup-id /home/k0va1/.config/polybar/launch.sh
-#exec --no-startup-id ~/.fehbg
+exec --no-startup-id ~/.fehbg
 exec --no-startup-id "setxkbmap -layout us,ru -option 'grp:alt_space_toggle' -option 'caps:ctrl_modifier'" # alt + space for lang toggle, caps lock => ctrl
-exec --no-startup-id nm-applet
-exec --no-startup-id matebook-applet
-exec --no-startup-id blueman-applet
+exec --no-startup-id "nm-applet --no-agent"
 exec --no-startup-id "udiskie -t"
-exec chromium
-#exec emacs
-exec urxvt
+exec --no-startup-id i3-msg 'workspace 1; exec chromium'
+exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/alacritty'
+exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/alacritty -e ranger'
 exec telegram-desktop
-#exec slack
-exec urxvt -e ranger
+exec slack
 exec nextcloud 
+exec spotify 

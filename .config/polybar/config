@@ -10,7 +10,7 @@ alert = #bd2c40
 [bar/main]
 monitor = ${env:MONITOR:}
 width = 100%
-height = 40
+height = 25
 radius = 0
 fixed-center = false
 
@@ -30,11 +30,12 @@ padding-right = 0
 module-margin-left = 2
 ;module-margin-right = 2
 
-font-0 = Meslo LGL Nerd Font:size=18;2
+font-0 = JetBrainsMono Nerd Font Mono:size=12;2
+font-1 = JetBrainsMono Nerd Font Mono:size=15;2
 
 modules-left = i3
 modules-center = 
-modules-right = filesystem pulseaudio xkeyboard cpu memory wlan battery date gmail
+modules-right = filesystem pulseaudio xkeyboard cpu memory network date
 
 tray-maxsize = 24
 tray-position = right
@@ -53,29 +54,32 @@ label-mode-padding = 2
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
-label-focused = %icon%
+label-focused = %name%:%icon%
+label-focused-font = 1
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = 1
 
-label-unfocused = %icon%
-label-unfocused-padding = 2
+label-unfocused = %name%:%icon%
+label-unfocused-font = 1
+label-unfocused-padding = 1
 
-label-visible = %icon%
+label-visible = %name%:%icon%
+label-visible-font = 1
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
-label-urgent = %icon%
+label-urgent = %name%:%icon%
+label-urgent-font = 1
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
-ws-icon-0 = 1;爵
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5; 
-ws-icon-5 = 6;
-ws-icon-default = 
+ws-icon-0 = 1;web
+ws-icon-1 = 2;dev
+ws-icon-2 = 3;ter
+ws-icon-3 = 4;soc
+ws-icon-4 = 5;ran
+ws-icon-5 = 6;spt
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -125,11 +129,17 @@ format-connected = 直
 format-disconnected = 睊
 ramp-signal-foreground = ${colors.foreground-alt}
 
+[module/network]
+type = internal/network
+interface = enp7s0
+interval = 3.0
+label-connected = D: %downspeed% U: %upspeed%
+
 [module/date]
 type = internal/date
 interval = 1
 
-date = "%a"
+date = "%a, %d %B"
 time = %H:%M
 label = %date% %time%
 
@@ -181,9 +191,3 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
-
-[module/gmail]
-type = custom/script
-exec = ~/.config/polybar/gmail/launch.py -ns
-tail = true
-click-left = xdg-open https://mail.google.com

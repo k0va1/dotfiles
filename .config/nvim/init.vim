@@ -169,8 +169,8 @@ map <leader>s? z=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
-autocmd! bufwritepost ~/.vim_runtime/my_configs.vim source ~/.vim_runtime/my_configs.vim
+map <leader>e :e! ~/.config/nvim/init.vim<cr>
+autocmd! bufwritepost ~/.config/nvim/init.vim source ~/.config/nvim/init.vim
 
 " Bash like keys for the command line
 cnoremap <C-A> <Home>
@@ -202,7 +202,7 @@ inoremap $e ""<esc>i
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
 " Open Ack and put the cursor in the right position
-map <leader>g :Ack
+map <leader>g :Ack 
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
@@ -381,7 +381,7 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue'
 let g:closetag_shortcut = '>'
 
 let g:ackprg = 'rg --no-heading --color never --column'
-
+let g:ack_autoclose = 1
 let g:LanguageClient_serverCommands = {
             \ 'ruby': ['~/.asdf/shims/solargraph', 'stdio'],
             \ 'rust': ['~/.asdf/shims/rls'],

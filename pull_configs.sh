@@ -10,5 +10,8 @@ yes | cp -Tfr $HOME/.config/polybar .config/polybar/
 # copy i3 configs
 yes | cp -Tfr $HOME/.config/i3 .config/i3/
 
+#alacritty
+yes | cp -Tfr $HOME/.config/alacritty .config/alacritty/
+
 # copy scripts
 yes | cp -Tfr $HOME/.local/bin .local/bin/

@@ -124,7 +124,7 @@ mode "resize" {
 }
 
 # lock the screen
-bindsym --release $mod+Shift+L exec slock
+bindsym --release Mod1+Shift+L exec slock
 
 # ranger
 bindsym --release $mod+Shift+Return exec alacritty -e ranger

@@ -48,6 +48,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'groenewege/vim-less'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-ruby/vim-ruby'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " ### CONFIGURATION ###
@@ -382,8 +384,8 @@ let g:closetag_shortcut = '>'
 
 let g:ackprg = 'rg --no-heading --color never --column'
 let g:ack_autoclose = 1
+" \ 'ruby': ['~/.asdf/shims/solargraph', 'stdio'],
 let g:LanguageClient_serverCommands = {
-            \ 'ruby': ['~/.asdf/shims/solargraph', 'stdio'],
             \ 'rust': ['~/.asdf/shims/rls'],
             \ 'vue':  ['~/.asdf/shims/vls'],
             \ 'javascript': ['/usr/bin/javascript-typescript-stdio'],
@@ -453,3 +455,38 @@ fun! CleanExtraSpaces()
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfun
+
+
+" coc vim
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)

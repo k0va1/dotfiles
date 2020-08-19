@@ -4,4 +4,4 @@ name=${1:-k0va1}
 
 nmcli con up $name >/dev/null 2>&1
 
-notify-send "🖧  VPN with Saray established!"
+notify-send "🖧  VPN ${name} established!" -t 1000

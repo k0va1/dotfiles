@@ -1,7 +1,8 @@
 #! /bin/sh
 
-name=${1:-k0va1}
+last_conn=$(nmcli con show --active | grep vpn | head -1 | awk '{print $1}')
+name=${1:-$last_conn}
 
 nmcli con down $name >/dev/null 2>&1
 
-notify-send "🖧  disconnected from Saray VPN"
+notify-send "🖧  disconnected from ${name} VPN" -t 1000

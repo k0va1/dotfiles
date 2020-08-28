@@ -249,7 +249,7 @@ let g:ctrlp_map = '<C-f>'
 let g:ctrlp_max_height = 20
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](\.git|node_modules|\.sass-cache|bower_components|build|\.bundle|\.idea)$'
+  \ 'dir': '\v[\/](node_modules|target|dist|bower_components|build)|(\.(swp|ico|git|svn|idea|bundle|sass-cache))$'
   \ }
 
 map <leader>f :CtrlPMRU<CR>
@@ -349,8 +349,9 @@ set termguicolors
 colorscheme dracula
 let g:ctrlp_show_hidden = 1
 if executable('rg')
-    let g:ctrlp_user_command = 'rg %s --files --color never --hidden -g ""'
-endif
+    let g:ctrlp_user_command = 'rg %s --files --color never --hidden -g "!{node_modules,.git}"'
+    let g:ctrlp_use_caching = 0
+  endif
 
 let g:vue_pre_processors = []
 

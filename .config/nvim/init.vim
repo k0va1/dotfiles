@@ -18,12 +18,16 @@ Plug 'posva/vim-vue'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'jreybert/vimagit'
 
+"fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
 " plugins from vimrc
 Plug 'mileszs/ack.vim'
 " Asynchronous Lint Engine
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
-Plug 'ctrlpvim/ctrlp.vim'
 " distraction-free mode
 Plug 'junegunn/goyo.vim'
 
@@ -245,19 +249,17 @@ let g:yankstack_yank_keys = ['y', 'd']
 nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
-""""""""""""""""""""""""""""""
-" => CTRL-P
-""""""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_map = '<C-f>'
-let g:ctrlp_max_height = 20
+"leaderf
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_ShortcutF = '<C-F>'
+
+noremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+noremap <leader>f :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](node_modules|target|dist|bower_components|build)|(\.(swp|ico|git|svn|idea|bundle|sass-cache))$'
   \ }
 
-map <leader>f :CtrlPMRU<CR>
-map <C-b> :CtrlPBuffer<cr>
 
 """"""""""""""""""""""""""""""
 " => ZenCoding

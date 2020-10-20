@@ -49,6 +49,10 @@ Plug 'groenewege/vim-less'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-ruby/vim-ruby'
 
+" haskell
+Plug 'neovimhaskell/haskell-vim'
+let g:haskell_classic_highlighting=1
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
@@ -385,13 +389,6 @@ let g:closetag_shortcut = '>'
 
 let g:ackprg = 'rg --no-heading --color never --column'
 let g:ack_autoclose = 1
-" \ 'ruby': ['~/.asdf/shims/solargraph', 'stdio'],
-let g:LanguageClient_serverCommands = {
-            \ 'rust': ['~/.asdf/shims/rls'],
-            \ 'vue':  ['~/.asdf/shims/vls'],
-            \ 'javascript': ['/usr/bin/javascript-typescript-stdio'],
-            \ }
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>"
 
@@ -491,6 +488,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gs :sp<CR><Plug>(coc-definition)
+nmap <silent> gv :vsp<CR><Plug>(coc-definition)
 
 " folding
 set foldmethod=syntax

@@ -1,0 +1,6 @@
+{
+  "codeLens.enable": true,
+  "solargraph.commandPath": "/home/k0va1/.asdf/shims/solargraph"
+}
+
+// "solargraph.useBundler": true,

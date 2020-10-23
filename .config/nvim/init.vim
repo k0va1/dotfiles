@@ -23,6 +23,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
+"nvim start screen
+Plug 'mhinz/vim-startify'
+
 " plugins from vimrc
 Plug 'mileszs/ack.vim'
 " Asynchronous Lint Engine
@@ -35,7 +38,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 
-Plug 'preservim/nerdtree'
 Plug 'godlygeek/tabular'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
@@ -175,7 +177,6 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -187,9 +188,13 @@ cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-K> <C-U>
 
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <M-b> <C-Left>
+cnoremap <M-f> <C-Right>
+
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Parenthesis/bracket
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -252,6 +257,7 @@ nmap <C-n> <Plug>yankstack_substitute_newer_paste
 "leaderf
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_ShortcutF = '<C-F>'
+let g:Lf_PreviewInPopup = 1
 
 noremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 noremap <leader>f :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
@@ -267,16 +273,7 @@ let g:ctrlp_custom_ignore = {
 " Enable all functions in all modes
 let g:user_zen_mode='a'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Nerd Tree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:NERDTreeWinPos = "left"
-let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let g:NERDTreeWinSize=35
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
+map <leader>nn :CocCommand explorer --width 35<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-multiple-cursors

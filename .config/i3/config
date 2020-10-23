@@ -126,6 +126,13 @@ mode "resize" {
 # lock the screen
 bindsym --release Mod1+Shift+L exec slock
 
+# spotify controls
+bindsym --release $mod+backslash exec like_current_song
+bindsym --release $mod+Prior exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+bindsym --release $mod+Next exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym --release $mod+Shift+plus exec "pactl -- set-sink-volume 0 +5%"
+bindsym --release $mod+Shift+minus exec "pactl -- set-sink-volume 0 -5%"
+
 # ranger
 bindsym --release $mod+Shift+Return exec alacritty -e ranger
 

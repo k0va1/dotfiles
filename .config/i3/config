@@ -159,11 +159,13 @@ exec_always --no-startup-id /home/k0va1/.config/polybar/launch.sh
 exec --no-startup-id "setxkbmap -layout us,ru -option 'grp:alt_space_toggle' -option 'caps:ctrl_modifier'" # alt + space for lang toggle, caps lock => ctrl
 exec --no-startup-id "nm-applet --no-agent"
 exec --no-startup-id "udiskie -t"
+exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/alacritty -e ranger; workspace 2'
+exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/alacritty; workspace 3'
+exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/alacritty; workspace 1'
 exec --no-startup-id i3-msg 'workspace 1; exec chromium'
-exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/alacritty'
-exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/alacritty -e ranger'
 exec --no-startup-id "feh --no-fehbg --bg-scale '/home/k0va1/media/wallpapers/003.jpg'"
 exec telegram-desktop
 exec slack
-exec nextcloud 
-exec spotify 
+exec nextcloud
+exec spotify
+exec zoom

@@ -55,6 +55,8 @@ Plug 'groenewege/vim-less'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-ruby/vim-ruby'
 
+Plug 'vim-test/vim-test'
+
 " haskell
 Plug 'neovimhaskell/haskell-vim'
 let g:haskell_classic_highlighting=1
@@ -258,6 +260,8 @@ nmap <C-n> <Plug>yankstack_substitute_newer_paste
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_ShortcutF = '<C-F>'
 let g:Lf_PreviewInPopup = 1
+let g:Lf_IndexTimeLimit = 2
+let g:Lf_UseCache = 0
 
 noremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 noremap <leader>f :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
@@ -493,3 +497,8 @@ nmap <silent> gv :vsp<CR><Plug>(coc-definition)
 " folding
 set foldmethod=syntax
 set nofoldenable
+
+" tests
+nmap <leader>t :TestNearest<CR>
+nmap <leader>tt :TestLast<CR>
+nmap <leader>tf :TestFile<CR>

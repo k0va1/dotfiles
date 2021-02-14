@@ -15,8 +15,11 @@ yes | cp -Trf .config/polybar $HOME/.config/polybar/
 # alacritty
 yes | cp -Trf .config/alacritty $HOME/.config/alacritty/
 
-# alacritty
+# picom
 yes | cp -Trf .config/picom $HOME/.config/picom/
 
 # scripts
 yes | cp -Trf .local/bin $HOME/.local/bin/
+
+# zprofile
+yes | cp -rf .zprofile $HOME/.zprofile

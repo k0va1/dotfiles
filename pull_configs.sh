@@ -19,3 +19,6 @@ yes | cp -Tfr $HOME/.local/bin .local/bin/
 
 # picom
 yes | cp -Tfr $HOME/.config/picom .config/picom/
+
+# zprofile
+yes | cp -rf $HOME/.zprofile .

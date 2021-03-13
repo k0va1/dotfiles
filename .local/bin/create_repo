@@ -1,0 +1,18 @@
+#! /bin/sh
+
+repo_name=$1
+
+ssh -T <<EOL git@git.k0va1.dev
+  git init --quiet --bare $repo_name.git
+
+  cat <<-EOF >> /etc/cgitrc
+repo.url=$repo_name
+repo.path=/storage/data/git/$repo_name.git
+
+EOF
+exit
+EOL
+
+echo "Repo $repo_name created!"
+echo -n "git@git.k0va1.dev:$repo_name.git" | xclip -selection clipboard
+echo "Remote url copied to clipboard!"

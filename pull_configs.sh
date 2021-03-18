@@ -20,5 +20,8 @@ yes | cp -Tfr $HOME/.local/bin .local/bin/
 # picom
 yes | cp -Tfr $HOME/.config/picom .config/picom/
 
+# dunst
+yes | cp -Tfr $HOME/.config/dunst .config/dunst/
+
 # zprofile
 yes | cp -rf $HOME/.zprofile .

@@ -17,6 +17,7 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+bindsym $mod+p exec passmenu
 
 # change focus
 bindsym $mod+h focus left
@@ -158,6 +159,7 @@ exec_always --no-startup-id /home/k0va1/.config/polybar/launch.sh
 #exec --no-startup-id ~/.fehbg
 exec --no-startup-id "setxkbmap -layout us,ru -option 'grp:alt_space_toggle' -option 'caps:ctrl_modifier'" # alt + space for lang toggle, caps lock => ctrl
 exec --no-startup-id "nm-applet --no-agent"
+exec --no-startup-id "blueman-applet"
 exec --no-startup-id "udiskie -t"
 exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/alacritty -e ranger; workspace 2'
 exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/alacritty; workspace 3'

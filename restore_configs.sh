@@ -23,3 +23,6 @@ yes | cp -Trf .local/bin $HOME/.local/bin/
 
 # zprofile
 yes | cp -rf .zprofile $HOME/.zprofile
+
+# dunst
+yes | cp -Tfr .config/dunst $HOME/.config/dunst

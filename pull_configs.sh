@@ -23,5 +23,5 @@ yes | cp -Tfr $HOME/.config/picom .config/picom/
 # dunst
 yes | cp -Tfr $HOME/.config/dunst .config/dunst/
 
-# zprofile
-yes | cp -Trf $HOME/.config/zsh .config/zsh
+# zsh configs
+rsync -av --progress $HOME/.config/zsh .config/ --exclude={'.zsh_history','.zcompdump*'}

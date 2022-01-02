@@ -24,4 +24,4 @@ yes | cp -Tfr $HOME/.config/picom .config/picom/
 yes | cp -Tfr $HOME/.config/dunst .config/dunst/
 
 # zprofile
-yes | cp -rf $HOME/.zprofile .
+yes | cp -Trf $HOME/.config/zsh .config/zsh

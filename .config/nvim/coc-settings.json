@@ -1,7 +1,7 @@
 {
   "codeLens.enable": true,
   "solargraph.commandPath": "/home/k0va1/.asdf/shims/solargraph",
-
+  "solargraph.transport": "stdio",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.keyMappings": {

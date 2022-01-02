@@ -51,6 +51,7 @@ Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'chr4/nginx.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'groenewege/vim-less'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-ruby/vim-ruby'
@@ -262,6 +263,7 @@ let g:Lf_ShortcutF = '<C-F>'
 let g:Lf_PreviewInPopup = 1
 let g:Lf_IndexTimeLimit = 2
 let g:Lf_UseCache = 0
+let g:Lf_UseMemoryCache = 0
 
 noremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 noremap <leader>f :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
@@ -351,6 +353,7 @@ set keymap=russian-jcukenwin
 set iminsert=0
 "Аналогично настраивается режим поиска
 set imsearch=0
+"set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
 set termguicolors
 colorscheme dracula
@@ -502,3 +505,6 @@ set nofoldenable
 nmap <leader>t :TestNearest<CR>
 nmap <leader>tt :TestLast<CR>
 nmap <leader>tf :TestFile<CR>
+
+"call CocActionAsync('runCommand', 'explorer.doAction', 'closest', ['reveal'], [['relative', 0, 'file']])
+

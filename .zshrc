@@ -2,7 +2,7 @@
 
 export EDITOR="vim"
 export TERMINAL="urxvt"
-export BROWSER="chromium"
+export BROWSER="google-chrome-stable"
 export GITHUB_ACCESS_TOKEN="c47088386532a21d2b094a0b037e0479b1f8d4f6"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin

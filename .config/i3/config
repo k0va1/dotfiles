@@ -18,6 +18,7 @@ bindsym $mod+q kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
 bindsym $mod+p exec passmenu
+bindsym $mod+n exec networkmanager_dmenu
 
 # change focus
 bindsym $mod+h focus left
@@ -133,6 +134,10 @@ bindsym --release $mod+Prior exec "dbus-send --print-reply --dest=org.mpris.Medi
 bindsym --release $mod+Next exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym --release $mod+Shift+plus exec "pactl -- set-sink-volume 0 +5%"
 bindsym --release $mod+Shift+minus exec "pactl -- set-sink-volume 0 -5%"
+bindsym --release $mod+Shift+m exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+
+# dunst
+bindsym --release Control+space exec "dunstctl close"
 
 # ranger
 bindsym --release $mod+Shift+Return exec alacritty -e ranger
@@ -150,7 +155,7 @@ for_window [class="Spotify"] move to workspace 6
 assign [class="TelegramDesktop"] 4
 assign [class="Slack"] 4
 assign [class="zoom"] 4
-assign [class="chromium"] 1
+assign [class="google-chrome-stable"] 1
 
 #exec_always --no-startup-id /home/k0va1/.scripts/desktop.sh
 exec picom -CGb
@@ -161,13 +166,13 @@ exec --no-startup-id "setxkbmap -layout us,ru -option 'grp:alt_space_toggle' -op
 exec --no-startup-id "nm-applet --no-agent"
 exec --no-startup-id "blueman-applet"
 exec --no-startup-id "udiskie -t"
-exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/alacritty -e ranger; workspace 2'
-exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/alacritty; workspace 3'
-exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/alacritty; workspace 1'
-exec --no-startup-id i3-msg 'workspace 1; exec chromium'
+#exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/alacritty -e ranger; workspace 2'
+#exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/alacritty; workspace 3'
+#exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/alacritty; workspace 1'
+exec --no-startup-id i3-msg 'workspace 1; exec google-chrome-stable'
 exec --no-startup-id "feh --no-fehbg --bg-scale '/home/k0va1/media/wallpapers/003.jpg'"
 exec telegram-desktop
-exec slack
-exec nextcloud
+#exec slack
+#exec nextcloud
 exec spotify
-exec zoom
+#exec zoom

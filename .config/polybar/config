@@ -35,7 +35,7 @@ font-1 = JetBrainsMono Nerd Font Mono:size=15;2
 
 modules-left = i3
 modules-center = 
-modules-right = filesystem pulseaudio xkeyboard cpu temperature memory network date
+modules-right = filesystem pulseaudio xkeyboard cpu temperature memory battery network date
 
 tray-maxsize = 24
 tray-position = right

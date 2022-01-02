@@ -21,8 +21,8 @@ yes | cp -Trf .config/picom $HOME/.config/picom/
 # scripts
 yes | cp -Trf .local/bin $HOME/.local/bin/
 
-# zprofile
-yes | cp -rf .zprofile $HOME/.zprofile
-
 # dunst
 yes | cp -Tfr .config/dunst $HOME/.config/dunst
+
+# zsh
+yes | cp -Tfr .config/zsh $HOME/.config/zsh/

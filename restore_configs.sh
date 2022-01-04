@@ -26,3 +26,6 @@ yes | cp -Tfr .config/dunst $HOME/.config/dunst
 
 # zsh
 yes | cp -Tfr .config/zsh $HOME/.config/zsh/
+
+# create symlink to zprofile in HOME dir
+ln -sf $HOME/.config/zsh/.zprofile $HOME/.zprofile

@@ -8,6 +8,10 @@ export TERMINAL="alacritty"
 export BROWSER="google-chrome-stable"
 export READER="zathura"
 
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export TERM="xterm-256color"
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"

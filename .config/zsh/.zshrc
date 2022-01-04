@@ -15,7 +15,7 @@ ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true"
 ENABLE_CORRECTION="true"
 
-plugins=(archlinux git bundler docker docker-compose web-search gem npm ruby zsh-autosuggestions zsh_reload)
+plugins=(archlinux git bundler docker docker-compose ruby zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -35,22 +35,12 @@ alias gcom="gco master"
 alias zcon="$EDITOR ~/.zshrc"
 alias t="bundle exec rspec"
 alias be="nocorrect bundle exec"
-alias t4bb="docker exec -it t4b_web_1 bash"
-alias t4bc="docker exec -it t4b_web_1 rails c"
 alias reconf="source $HOME/.zshrc"
 alias vup="nmcli con up fuckrf"
 alias vdn="nmcli con down fuckrf"
 alias vim="nvim"
 alias rm="rm -i"
 alias open="xdg-open"
-
-#export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
-#export POSTGRES_USER=a.koval 
-
-#test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-
-# Enable history in IEX
-#export ERL_AFLAGS="-kernel shell_history enabled"
 
 ###-tns-completion-start-###
 if [ -f $HOME/.tnsrc ]; then 

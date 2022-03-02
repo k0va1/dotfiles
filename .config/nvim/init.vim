@@ -1,8 +1,8 @@
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
-    echo "Downloading junegunn/vim-plug to manage plugins..."
-    silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-    autocmd VimEnter * PlugInstall
+  echo "Downloading junegunn/vim-plug to manage plugins..."
+  silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+  autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))" my plugins
@@ -17,7 +17,7 @@ Plug 'tpope/vim-surround'
 Plug 'posva/vim-vue'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'jreybert/vimagit'
-
+Plug 'slim-template/vim-slim'
 "fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -55,6 +55,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'groenewege/vim-less'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-ruby/vim-ruby'
+Plug 'alvan/vim-closetag'
 
 Plug 'vim-test/vim-test'
 
@@ -165,7 +166,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")   | exe "normal! g'\"" | endif
 
 if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+  autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -269,8 +270,8 @@ noremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 noremap <leader>f :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](node_modules|target|dist|bower_components|build)|(\.(swp|ico|git|svn|idea|bundle|sass-cache))$'
-  \ }
+      \ 'dir': '\v[\/](node_modules|target|dist|bower_components|build)|(\.(swp|ico|git|svn|idea|bundle|sass-cache))$'
+      \ }
 
 
 """"""""""""""""""""""""""""""
@@ -300,18 +301,18 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-            \ 'colorscheme': 'one',
-            \ 'active': {
-            \   'left': [ ['mode', 'paste'],
-            \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-            \   'right': [ [ 'lineinfo' ], ['percent'] ]
-            \ },
-            \ 'component': {
-            \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-            \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-            \ },
-            \ 'component_visible_condition': {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+        \   'left': [ ['mode', 'paste'],
+        \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+        \   'right': [ [ 'lineinfo' ], ['percent'] ]
+        \ },
+        \ 'component': {
+          \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+          \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+          \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+          \ },
+          \ 'component_visible_condition': {
             \   'readonly': '(&filetype!="help"&& &readonly)',
             \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
             \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
@@ -324,10 +325,10 @@ let g:lightline = {
 " => Ale (syntax checker and linter)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_linters = {
-            \   'javascript': ['jshint'],
-            \   'python': ['flake8'],
-            \   'go': ['go', 'golint', 'errcheck']
-            \}
+      \   'javascript': ['jshint'],
+      \   'python': ['flake8'],
+      \   'go': ['go', 'golint', 'errcheck']
+      \}
 
 nmap <silent> <leader>a <Plug>(ale_next_wrap)
 
@@ -359,9 +360,9 @@ set termguicolors
 colorscheme dracula
 let g:ctrlp_show_hidden = 1
 if executable('rg')
-    let g:ctrlp_user_command = 'rg %s --files --color never --hidden -g "!{node_modules,.git}"'
-    let g:ctrlp_use_caching = 0
-  endif
+  let g:ctrlp_user_command = 'rg %s --files --color never --hidden -g "!{node_modules,.git}"'
+  let g:ctrlp_use_caching = 0
+endif
 
 let g:vue_pre_processors = []
 
@@ -370,23 +371,23 @@ filetype on
 "nerd comments for vue files
 let g:ft = ''
 function! NERDCommenter_before()
-    if &ft == 'vue'
-        let g:ft = 'vue'
-        let stack = synstack(line('.'), col('.'))
-        if len(stack) > 0
-            let syn = synIDattr((stack)[0], 'name')
-            if len(syn) > 0
-                exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-            endif
-        endif
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
     endif
+  endif
 endfunction
 
 function! NERDCommenter_after()
-    if g:ft == 'vue'
-        setf vue
-        let g:ft = ''
-    endif
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
 endfunction
 
 "vim-closetag
@@ -403,61 +404,61 @@ let g:UltiSnipsExpandTrigger="<tab>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Returns true if paste mode is enabled
 function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
+  if &paste
+    return 'PASTE MODE  '
+  endif
+  return ''
 endfunction
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
-    let l:currentBufNum = bufnr("%")
-    let l:alternateBufNum = bufnr("#")
+  let l:currentBufNum = bufnr("%")
+  let l:alternateBufNum = bufnr("#")
 
-    if buflisted(l:alternateBufNum)
-        buffer #
-    else
-        bnext
-    endif
+  if buflisted(l:alternateBufNum)
+    buffer #
+  else
+    bnext
+  endif
 
-    if bufnr("%") == l:currentBufNum
-        new
-    endif
+  if bufnr("%") == l:currentBufNum
+    new
+  endif
 
-    if buflisted(l:currentBufNum)
-        execute("bdelete! ".l:currentBufNum)
-    endif
+  if buflisted(l:currentBufNum)
+    execute("bdelete! ".l:currentBufNum)
+  endif
 endfunction
 
 function! CmdLine(str)
-    call feedkeys(":" . a:str)
+  call feedkeys(":" . a:str)
 endfunction
 
 function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
+  let l:saved_reg = @"
+  execute "normal! vgvy"
 
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
+  let l:pattern = escape(@", "\\/.*'$^~[]")
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
+  if a:direction == 'gv'
+    call CmdLine("Ack '" . l:pattern . "' " )
+  elseif a:direction == 'replace'
+    call CmdLine("%s" . '/'. l:pattern . '/')
+  endif
 
-    let @/ = l:pattern
-    let @" = l:saved_reg
+  let @/ = l:pattern
+  let @" = l:saved_reg
 endfunction
 
 " Delete trailing white space on save, useful for some filetype  s ;)
 fun! CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  silent! %s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
 endfun
 
 
@@ -508,3 +509,27 @@ nmap <leader>tf :TestFile<CR>
 
 "call CocActionAsync('runCommand', 'explorer.doAction', 'closest', ['reveal'], [['relative', 0, 'file']])
 
+
+" autoindent files
+augroup autoindent
+  au!
+  let blacklist = ['dockerfile', 'yaml', 'markdown', 'conf']
+  autocmd BufWritePre * if index(blacklist, &ft) < 0 | :normal migg=G`i
+augroup End
+
+" vim-closetag config
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.html.erb'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
+" end vim-closetag config

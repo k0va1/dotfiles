@@ -22,6 +22,7 @@ alias gb="git branch --sort='committerdate'"
 alias gsta="git stash push"
 alias gcod="gco develop"
 alias gcom="gco master"
+alias gdc="git diff --cached"
 alias zcon="$EDITOR ~/.zshrc"
 alias t="bundle exec rspec"
 alias be="nocorrect bundle exec"
@@ -31,7 +32,7 @@ alias open="xdg-open"
 
 ###-tns-completion-start-###
 if [ -f $HOME/.tnsrc ]; then 
-    source $HOME/.tnsrc 
+  source $HOME/.tnsrc 
 fi
 ###-tns-completion-end-###
 

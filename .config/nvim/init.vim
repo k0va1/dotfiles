@@ -280,7 +280,7 @@ let g:ctrlp_custom_ignore = {
 " Enable all functions in all modes
 let g:user_zen_mode='a'
 
-map <leader>nn :CocCommand explorer --width 35<CR>
+map <leader>nn :CocCommand explorer --width 35 --root-strategies cwd<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-multiple-cursors
@@ -533,3 +533,9 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
 "
 let g:closetag_filetypes = 'html,xhtml,phtml'
 " end vim-closetag config
+"
+" disable netrw
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
+
+autocmd VimEnter * CocCommand explorer --root-strategies cwd --width 35

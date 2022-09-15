@@ -1,9 +1,9 @@
 [colors]
-background = #222
+background = #282A36
 background-alt = #444
-foreground = #dfdfdf
+foreground = #F8F8F2
 foreground-alt = #555
-primary = #ffb52a
+primary = #8BE9FD
 secondary = #e60053
 alert = #bd2c40
 
@@ -14,7 +14,7 @@ height = 25
 radius = 0
 fixed-center = false
 
-background = ${colors.backgroundj
+background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 3
@@ -35,7 +35,7 @@ font-1 = JetBrainsMono Nerd Font Mono:size=15;2
 
 modules-left = i3
 modules-center = 
-modules-right = filesystem pulseaudio xkeyboard cpu temperature memory battery network date
+modules-right = crypto filesystem pulseaudio xkeyboard cpu temperature memory battery network date
 
 tray-maxsize = 24
 tray-position = right
@@ -43,6 +43,15 @@ tray-padding = 2
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/crypto]
+type = custom/script
+
+exec = crypto_prices.sh
+
+; Seconds to sleep between updates
+; Default: 5 (0 if `tail = true`)
+interval = 60
 
 [module/i3]
 type = internal/i3

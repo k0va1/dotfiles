@@ -4,6 +4,8 @@
   "solargraph.transport": "stdio",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
+  "explorer.file.reveal.auto": true,
+  "explorer.file.reveal.whenOpen": true,
   "explorer.keyMappings": {
     "i": false,
 
@@ -62,14 +64,15 @@
     "gb": "gotoSource:buffer",
 
     "[[": "sourcePrev",
-    "]]": "sourceNext",
+      "]]": "sourceNext",
 
-    "[d": "diagnosticPrev",
-    "]d": "diagnosticNext",
+      "[d": "diagnosticPrev",
+        "]d": "diagnosticNext",
 
-    "[c": "gitPrev",
-    "]c": "gitNext",
-    "<<": "gitStage",
-    ">>": "gitUnstage"
-  }
+        "[c": "gitPrev",
+          "]c": "gitNext",
+          "<<": "gitStage",
+          ">>": "gitUnstage"
+  },
+  "tsserver.maxTsServerMemory": "1024"
 }

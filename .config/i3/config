@@ -2,6 +2,10 @@ set $mod Mod4
 
 font pango:JetBrainsMono Nerd Font Mono 8
 
+# colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #6272A4 #282A36 #FF79C6 #2e9ef4   #285577
+
 # screens config
 # set $monleft DP1
 # set $monright eDP1
@@ -114,10 +118,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+r mode "resize"
 # resize window (you can also use the mouse for that)
 mode "resize" {
-  bindsym h resize shrink width 10 px or 10 ppt
-    bindsym j resize grow width 10 px or 10 ppt
-    bindsym i resize grow height 10 px or 10 ppt
-    bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize shrink width 10 px or 10 ppt
+    bindsym h resize grow width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym j resize shrink height 10 px or 10 ppt
 
 # back to normal: Enter or Escape or $mod+r
     bindsym Return mode "default"
@@ -130,8 +134,8 @@ bindsym --release Mod1+Shift+L exec slock
 
 # spotify controls
 bindsym --release $mod+backslash exec like_current_song
-bindsym --release $mod+Prior exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
-bindsym --release $mod+Next exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym --release $mod+Shift+bracketleft exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym --release $mod+Shift+bracketright exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 bindsym --release $mod+Shift+plus exec "set_volume +5%"
 bindsym --release $mod+Shift+minus exec "set_volume -5%"
 bindsym --release $mod+Shift+m exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"

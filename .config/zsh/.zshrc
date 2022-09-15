@@ -7,6 +7,11 @@ ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true"
 ENABLE_CORRECTION="true"
 
+if [ -x "$(command -v fzf)" ]; then
+  source /usr/share/fzf/key-bindings.zsh
+  source /usr/share/fzf/completion.zsh
+fi
+
 plugins=(archlinux git bundler docker docker-compose ruby zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh

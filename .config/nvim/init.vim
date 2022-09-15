@@ -5,6 +5,7 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
   autocmd VimEnter * PlugInstall
 endif
 
+let g:coc_node_path = '/home/k0va1/.asdf/installs/nodejs/16.15.1/bin/node'
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))" my plugins
 Plug 'dracula/vim'
 Plug 'editorconfig/editorconfig-vim'
@@ -14,6 +15,8 @@ Plug 'SirVer/ultisnips'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
+Plug 'AndrewRadev/tagalong.vim'
+let g:tagalong_additional_filetypes = ['javascript']
 Plug 'posva/vim-vue'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'jreybert/vimagit'
@@ -55,9 +58,17 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'groenewege/vim-less'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-ruby/vim-ruby'
-Plug 'alvan/vim-closetag'
+
+" markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 Plug 'vim-test/vim-test'
+
+" find and replace tool
+Plug 'brooth/far.vim'
+
+"nnoremap <silent> <leader>g   :Farf<cr>
+"vnoremap <silent> <leader>g   :Farf<cr>
 
 " haskell
 Plug 'neovimhaskell/haskell-vim'
@@ -65,6 +76,7 @@ let g:haskell_classic_highlighting=1
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+
 
 " ### CONFIGURATION ###
 filetype plugin on
@@ -265,6 +277,7 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_IndexTimeLimit = 2
 let g:Lf_UseCache = 0
 let g:Lf_UseMemoryCache = 0
+let g:Lf_PreviewResult = {'Rg': 1 }
 
 noremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 noremap <leader>f :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
@@ -280,7 +293,7 @@ let g:ctrlp_custom_ignore = {
 " Enable all functions in all modes
 let g:user_zen_mode='a'
 
-map <leader>nn :CocCommand explorer --width 35 --root-strategies cwd<CR>
+map <leader>nn :CocCommand explorer --width 35<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-multiple-cursors
@@ -329,9 +342,10 @@ let g:ale_linters = {
       \   'python': ['flake8'],
       \   'go': ['go', 'golint', 'errcheck']
       \}
-
+let g:ale_fixers = {'javascript': ['eslint']}
 nmap <silent> <leader>a <Plug>(ale_next_wrap)
 
+let g:ale_fix_on_save = 1
 " Disabling highlighting
 let g:ale_set_highlights = 0
 
@@ -391,13 +405,16 @@ function! NERDCommenter_after()
 endfunction
 
 "vim-closetag
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.html.erb,*.js'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
 let g:closetag_shortcut = '>'
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
 
 let g:ackprg = 'rg --no-heading --color never --column'
 let g:ack_autoclose = 1
 
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<C-tab>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -466,24 +483,24 @@ endfun
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"function! s:check_back_space() abort
+"let col = col('.') - 1
+"return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
+"" Use <c-space> to trigger completion.
+"if has('nvim')
+"inoremap <silent><expr> <c-space> coc#refresh()
+"else
+"inoremap <silent><expr> <c-@> coc#refresh()
+"endif
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -513,7 +530,7 @@ nmap <leader>tf :TestFile<CR>
 " autoindent files
 augroup autoindent
   au!
-  let blacklist = ['dockerfile', 'yaml', 'markdown', 'conf']
+  let blacklist = ['dockerfile', 'yaml', 'markdown', 'conf', 'tads', '', 'javascript']
   autocmd BufWritePre * if index(blacklist, &ft) < 0 | :normal migg=G`i
 augroup End
 
@@ -521,21 +538,11 @@ augroup End
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
 "
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.html.erb'
-
-" filenames like *.xml, *.xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
-
-" filetypes like xml, html, xhtml, ...
-" These are the file types where this plugin is enabled.
-"
-let g:closetag_filetypes = 'html,xhtml,phtml'
 " end vim-closetag config
 "
-" disable netrw
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
 
-autocmd VimEnter * CocCommand explorer --root-strategies cwd --width 35
+" reduce memory consumption tsserver
+autocmd VimLeavePre * :call coc#rpc#kill()
+autocmd VimLeave * if get(g:, 'coc_process_pid', 0) | call system('kill -9 -'.g:coc_process_pid) | endif
+
+nnoremap <silent> <leader>m :MagitOnly<CR>

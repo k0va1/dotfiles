@@ -3,7 +3,6 @@
 # copy vim configs
 yes | cp -rf $HOME/.config/nvim/init.vim .config/nvim/
 yes | cp -rf $HOME/.config/nvim/UltiSnips .config/nvim/
-yes | cp -rf $HOME/.config/nvim/coc-settings.json .config/nvim/
 
 # copy polybar configs
 yes | cp -Tfr $HOME/.config/polybar .config/polybar/

@@ -5,7 +5,7 @@ export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
 
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="google-chrome-stable"
+export BROWSER="firefox-developer-edition"
 export READER="zathura"
 
 export GOPATH=$HOME/go
